@@ -18,6 +18,9 @@ vim.opt.mouse = 'a'
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
+-- What should be included in saved sessions
+vim.opt.sessionoptions = 'buffers,curdir,folds,globals,tabpages'
+
 -- Sync clipboard between OS and Neovim.
 -- See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
