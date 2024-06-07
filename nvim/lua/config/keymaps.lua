@@ -7,6 +7,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+-- TODO: check if these are still useful while having Trouble isntalled
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -22,3 +23,16 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Navigate buffers with tab and shift + tab
+vim.keymap.set('n', '<tab>', ':bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<s-tab>', ':bprev<CR>', { desc = 'Previous buffer' })
+
+-- Write buffers
+vim.keymap.set('n', '<leader>ww', ':w<cr>', { desc = 'Write current buffer' })
+vim.keymap.set('n', '<leader>wa', ':wa<cr>', { desc = 'Write all buffers' })
+
+-- Quit buffers and windows
+vim.keymap.set('n', '<leader>x', ':bd<CR>', { desc = 'Delete buffer' })
+vim.keymap.set('n', '<leader>qq', ':q<cr>', { desc = 'Quit current buffer' })
+vim.keymap.set('n', '<leader>qa', ':qa<cr>', { desc = 'Quit all buffers' })

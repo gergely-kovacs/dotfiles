@@ -1,5 +1,17 @@
 return {
   'rcarriga/nvim-notify',
+  dependencies = {
+    'nvim-telescope/telescope.nvim',
+  },
   opts = {},
-  -- TODO: set up keymap for :Telescope notify command, and add telescope as dependency
+  keys = {
+    { '<leader>fm', '<cmd>Telescope notify<cr>', desc = '[M]essages' },
+    {
+      '<leader>qm',
+      function()
+        require('notify').dismiss { silent = true, pending = true }
+      end,
+      desc = '[M]essages',
+    },
+  },
 }

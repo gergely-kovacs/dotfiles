@@ -9,6 +9,9 @@ vim.g.have_nerd_font = true
 -- See `:help vim.opt`
 -- For more options, you can see `:help option-list`
 
+-- 24 bit colors enabled
+vim.opt.termguicolors = true
+
 -- Make line numbers default
 vim.opt.number = true
 
@@ -43,7 +46,7 @@ vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 100
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true

@@ -4,7 +4,7 @@ return {
   cmd = { 'TodoTrouble', 'TodoTelescope' },
   dependencies = { 'nvim-lua/plenary.nvim' },
   opts = {
-    -- signs = false
+    signs = false,
   },
   keys = {
     {
@@ -21,14 +21,13 @@ return {
       end,
       desc = 'Previous Todo Comment',
     },
-    -- TODO: review keymaps
-    { '<leader>xt', '<cmd>Trouble todo toggle<cr>', desc = 'Todo (Trouble)' },
+    { '<leader>tn', '<cmd>Trouble todo toggle<cr>', desc = '[N]otes' },
     {
-      '<leader>xT',
+      '<leader>tN',
       '<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>',
-      desc = 'Todo/Fix/Fixme (Trouble)',
+      desc = 'Todo / Fix / Fixme',
     },
-    { '<leader>st', '<cmd>TodoTelescope<cr>', desc = 'Todo' },
-    { '<leader>sT', '<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>', desc = 'Todo/Fix/Fixme' },
+    { '<leader>fn', '<cmd>TodoTelescope<cr>', desc = '[N]otes' },
+    { '<leader>fN', '<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>', desc = 'Todo / Fix / Fixme' },
   },
 }

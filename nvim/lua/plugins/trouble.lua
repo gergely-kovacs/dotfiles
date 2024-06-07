@@ -1,38 +1,83 @@
 return {
   'folke/trouble.nvim',
-  opts = {},
-  cmd = 'Trouble',
-  -- TODO: configure the keymaps
+  dependencies = {
+    'folke/which-key.nvim',
+  },
+  opts = {
+    use_diagnostic_signs = true,
+  },
+  init = function()
+    require('which-key').register {
+      ['<leader>t'] = {
+        name = '[T]rouble',
+        _ = 'which_key_ignore',
+      },
+    }
+  end,
   keys = {
     {
-      '<leader>xx',
+      '<leader>tt',
+      '<cmd>Trouble toggle<cr>',
+      desc = '[T]oggle',
+    },
+
+    {
+      '<leader>td',
       '<cmd>Trouble diagnostics toggle<cr>',
-      desc = 'Diagnostics (Trouble)',
+      desc = '[D]iagnostics',
     },
     {
-      '<leader>xX',
+      '<leader>tD',
       '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
-      desc = 'Buffer Diagnostics (Trouble)',
+      desc = 'Buffer Diagnostics',
     },
     {
-      '<leader>cs',
+      '<leader>ts',
       '<cmd>Trouble symbols toggle focus=false<cr>',
-      desc = 'Symbols (Trouble)',
+      desc = '[S]ymbols',
     },
     {
-      '<leader>cl',
+      '<leader>tl',
       '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
-      desc = 'LSP Definitions / references / ... (Trouble)',
+      desc = '[L]SP Definitions / references / ...',
     },
     {
-      '<leader>xL',
+      '<leader>tL',
       '<cmd>Trouble loclist toggle<cr>',
-      desc = 'Location List (Trouble)',
+      desc = 'Location List',
     },
     {
-      '<leader>xQ',
+      '<leader>tq',
       '<cmd>Trouble qflist toggle<cr>',
-      desc = 'Quickfix List (Trouble)',
+      desc = '[Q]uickfix List',
+    },
+    {
+      '[q',
+      function()
+        if require('trouble').is_open() then
+          require('trouble').prev { skip_groups = true, jump = true }
+        else
+          local ok, err = pcall(vim.cmd.cprev)
+          if not ok then
+            vim.notify(err, vim.log.levels.ERROR)
+          end
+        end
+      end,
+      desc = 'Previous Trouble/Quickfix Item',
+    },
+    {
+      ']q',
+      function()
+        if require('trouble').is_open() then
+          require('trouble').next { skip_groups = true, jump = true }
+        else
+          local ok, err = pcall(vim.cmd.cnext)
+          if not ok then
+            vim.notify(err, vim.log.levels.ERROR)
+          end
+        end
+      end,
+      desc = 'Next Trouble/Quickfix Item',
     },
   },
 }
