@@ -15,33 +15,12 @@ return {
         down = '<M-j>',
         up = '<M-k>',
 
+        -- FIXME: does not always move in normal mode
         -- Move current line in Normal mode
         line_left = '',
         line_right = '',
         line_down = '<M-j>',
         line_up = '<M-k>',
-      },
-    }
-
-    -- TODO: add feature to display untracked file as added
-    require('mini.diff').setup {
-      view = {
-        style = 'sign',
-        signs = { add = '▎', change = '▎', delete = '' },
-      },
-      mappings = {
-        -- Apply hunks inside a visual/operator region
-        apply = 'gha',
-        -- Reset hunks inside a visual/operator region
-        reset = 'ghr',
-        -- Hunk range textobject to be used inside operator
-        -- Works also in Visual mode if mapping differs from apply and reset
-        textobject = 'gh',
-        -- Go to hunk range in corresponding direction
-        goto_first = '[H',
-        goto_last = ']H',
-        goto_prev = '[h',
-        goto_next = ']h',
       },
     }
 

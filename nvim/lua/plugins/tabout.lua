@@ -1,7 +1,7 @@
 return {
   {
     'abecodes/tabout.nvim',
-    lazy = false,
+    event = 'InsertEnter',
     config = function()
       require('tabout').setup {
         tabkey = '<Tab>', -- key to trigger tabout, set to an empty string to disable
@@ -25,11 +25,4 @@ return {
       }
     end,
   },
-  -- {
-  --   'L3MON4D3/LuaSnip',
-  --   keys = function()
-  --     -- Disable default tab keybinding in LuaSnip
-  --     return {}
-  --   end,
-  -- },
 }

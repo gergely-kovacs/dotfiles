@@ -1,5 +1,6 @@
 return {
   'folke/trouble.nvim',
+  event = 'VeryLazy',
   dependencies = {
     'folke/which-key.nvim',
   },
@@ -20,7 +21,6 @@ return {
       '<cmd>Trouble toggle<cr>',
       desc = '[T]oggle',
     },
-
     {
       '<leader>td',
       '<cmd>Trouble diagnostics toggle<cr>',

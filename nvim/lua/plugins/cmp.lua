@@ -24,6 +24,7 @@ return {
         },
       },
     },
+    'monkoose/neocodeium',
     'saadparwaiz1/cmp_luasnip',
     'neovim/nvim-lspconfig',
     'hrsh7th/cmp-nvim-lsp',
@@ -34,7 +35,19 @@ return {
   config = function()
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
+    local neocodeium = require 'neocodeium'
+    local commands = require 'neocodeium.commands'
+
     luasnip.config.setup {}
+
+    cmp.event:on('menu_opened', function()
+      commands.disable()
+      neocodeium.clear()
+    end)
+
+    cmp.event:on('menu_closed', function()
+      commands.enable()
+    end)
 
     cmp.setup {
       snippet = {
@@ -45,15 +58,15 @@ return {
       completion = {
         completeopt = 'menu,menuone,noinsert',
       },
-      -- FIXME: remap instead of adding on top
-      mapping = cmp.mapping.preset.insert {
-        ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
-        ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+      view = cmp.CustomEntriesViewConfig,
+      mapping = {
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete {},
+        ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<C-y>'] = cmp.mapping.confirm { select = true },
+        ['<C-y>'] = cmp.mapping.confirm(),
         ['<C-l>'] = cmp.mapping(function()
           if luasnip.expand_or_locally_jumpable() then
             luasnip.expand_or_jump()
@@ -74,9 +87,36 @@ return {
       }),
     }
 
+    local cmdline_mapping = {
+      ['<C-n>'] = {
+        c = function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            fallback()
+          end
+        end,
+      },
+      ['<C-p>'] = {
+        c = function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            fallback()
+          end
+        end,
+      },
+      ['<C-e>'] = {
+        c = cmp.mapping.abort(),
+      },
+      ['<C-y>'] = {
+        c = cmp.mapping.confirm { select = false },
+      },
+    }
+
     -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline({ '/', '?' }, {
-      mapping = cmp.mapping.preset.cmdline(),
+      mapping = cmdline_mapping,
       sources = {
         { name = 'buffer' },
       },
@@ -84,7 +124,7 @@ return {
 
     -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline(':', {
-      mapping = cmp.mapping.preset.cmdline(),
+      mapping = cmdline_mapping,
       sources = cmp.config.sources({
         { name = 'path' },
       }, {

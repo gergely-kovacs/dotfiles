@@ -1,5 +1,6 @@
 return {
   'mrjones2014/smart-splits.nvim',
+  event = 'UIEnter',
   config = function()
     -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
     vim.keymap.set('n', '<A-h>', require('smart-splits').resize_left)

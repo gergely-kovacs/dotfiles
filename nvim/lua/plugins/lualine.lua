@@ -1,33 +1,38 @@
 return {
   'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+  },
   opts = {
     sections = {
       lualine_a = {
         'mode',
-        'searchcount',
       },
       lualine_b = {
+        { 'filename', path = 1 },
+      },
+      lualine_c = {
         'branch',
         'diff',
       },
-      lualine_c = {
+      lualine_x = {
         'diagnostics',
       },
-      lualine_x = {
+      lualine_y = {
         'fileformat',
         'encoding',
-      },
-      lualine_y = {
         'filetype',
       },
       lualine_z = {
-        'filename',
         'location',
+        'progress',
       },
     },
     extensions = {
       'oil',
+      'lazy',
+      'mason',
+      'trouble',
     },
   },
 }
