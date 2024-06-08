@@ -4,17 +4,15 @@ return {
     'nvim-telescope/telescope.nvim',
   },
   opts = {},
-  init = function()
-    require('telescope').load_extension 'yank_history'
-
-    vim.keymap.set({ 'n', 'x' }, '<leader>fy', '<cmd>Telescope yank_history<cr>', { desc = '[Y]ank history' })
-
-    vim.keymap.set({ 'n', 'x' }, 'p', '<Plug>(YankyPutAfter)', { desc = 'Yanky Put After' })
-    vim.keymap.set({ 'n', 'x' }, 'P', '<Plug>(YankyPutBefore)', { desc = 'Yanky Put Before' })
-    vim.keymap.set({ 'n', 'x' }, 'gp', '<Plug>(YankyGPutAfter)', { desc = 'Yanky Put in Next Line' })
-    vim.keymap.set({ 'n', 'x' }, 'gP', '<Plug>(YankyGPutBefore)', { desc = 'Yanky Put in Previous Line' })
-
-    vim.keymap.set('n', ']y', '<Plug>(YankyNextEntry)', { desc = 'Next Yank Entry' })
-    vim.keymap.set('n', '[y', '<Plug>(YankyPreviousEntry)', { desc = 'Previous Yank Entry' })
-  end,
+  keys = {
+    -- stylua: ignore
+    { "<leader>fy", function() require("telescope").extensions.yank_history.yank_history({ }) end, desc = "[Y]ank History" },
+    { 'y', '<Plug>(YankyYank)', mode = { 'n', 'x' }, desc = 'Yank Text' },
+    { 'p', '<Plug>(YankyPutAfter)', mode = { 'n', 'x' }, desc = 'Put Yanked Text After Cursor' },
+    { 'P', '<Plug>(YankyPutBefore)', mode = { 'n', 'x' }, desc = 'Put Yanked Text Before Cursor' },
+    { 'gp', '<Plug>(YankyGPutAfter)', mode = { 'n', 'x' }, desc = 'Put Yanked Text After Selection' },
+    { 'gP', '<Plug>(YankyGPutBefore)', mode = { 'n', 'x' }, desc = 'Put Yanked Text Before Selection' },
+    { '[y', '<Plug>(YankyCycleForward)', desc = 'Cycle Forward Through Yank History' },
+    { ']y', '<Plug>(YankyCycleBackward)', desc = 'Cycle Backward Through Yank History' },
+  },
 }
