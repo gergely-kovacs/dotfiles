@@ -6,5 +6,11 @@ return {
     'nvim-telescope/telescope.nvim',
   },
   opts = {},
-  -- TODO: add keymaps
+  keys = {
+    { '<leader>gg', '<cmd>Neogit<cr>', { desc = 'Neo[G]it Tab' } },
+    { '<leader>gu', '<cmd>Neogit kind=split_above<cr>', { desc = 'Neo[G]it Split Above' } },
+    { '<leader>gd', '<cmd>Neogit kind=split<cr>', { desc = 'Neo[G]it Split Below' } },
+    { '<leader>gl', '<cmd>Neogit kind=vsplit<cr>', { desc = 'Neo[G]it Split Right' } },
+    { '<leader>gc', '<cmd>Neogit commit<cr>', { desc = 'Neogit [C]ommit' } },
+  },
 }

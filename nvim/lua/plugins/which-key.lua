@@ -18,6 +18,10 @@ return {
         name = '[L]SP',
         _ = 'which_key_ignore',
       },
+      ['<leader>g'] = {
+        name = '[G]it',
+        _ = 'which_key_ignore',
+      },
     }
   end,
 }
