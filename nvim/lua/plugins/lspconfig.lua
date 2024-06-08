@@ -34,20 +34,21 @@ return {
         local map = function(keys, func, desc)
           vim.keymap.set('n', keys, func, {
             buffer = event.buf,
-            desc = 'LSP: ' .. desc,
+            desc = desc,
           })
         end
 
-        map('gy', require('telescope.builtin').lsp_type_definitions, 'Go to T[y]pe Definition')
-        map('gd', require('telescope.builtin').lsp_definitions, 'Go to [D]efinition')
-        map('gD', vim.lsp.buf.declaration, 'Go to Declaration')
-        map('gr', require('telescope.builtin').lsp_references, 'Go to [R]eferences')
-        map('gI', require('telescope.builtin').lsp_implementations, 'Go to Implementation')
+        map('gy', require('telescope.builtin').lsp_type_definitions, 'T[y]pe Definition')
+        map('gd', require('telescope.builtin').lsp_definitions, '[D]efinition')
+        map('gD', vim.lsp.buf.declaration, 'Declaration')
+        map('gr', require('telescope.builtin').lsp_references, '[R]eferences')
+        map('gI', require('telescope.builtin').lsp_implementations, 'Implementation')
         map('<leader>ld', require('telescope.builtin').lsp_document_symbols, '[D]ocument Symbols')
         map('<leader>lw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace Symbols')
         -- map('<leader>lr', vim.lsp.buf.rename, '[R]ename')
-        map('<leader>la', vim.lsp.buf.code_action, '[A]ction')
+        map('<leader>la', vim.lsp.buf.code_action, '[A]ctions')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
+        vim.keymap.set('i', '<c-k>', vim.lsp.buf.signature_help, { desc = 'Signature Help' })
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
