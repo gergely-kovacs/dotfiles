@@ -28,6 +28,11 @@ config.keys = {
     action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
   },
   {
+    key = 'z',
+    mods = 'LEADER',
+    action = wezterm.action.TogglePaneZoomState,
+  },
+  {
     key = 's',
     mods = 'LEADER|CTRL',
     action = wezterm.action.SendKey { key = 's', mods = 'CTRL' },
