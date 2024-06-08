@@ -45,6 +45,7 @@ return {
       completion = {
         completeopt = 'menu,menuone,noinsert',
       },
+      -- FIXME: remap instead of adding on top
       mapping = cmp.mapping.preset.insert {
         ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
         ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },

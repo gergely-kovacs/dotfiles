@@ -8,10 +8,10 @@ return {
         'WhoIsSethDaniel/mason-tool-installer.nvim',
       },
     },
-    {
-      'j-hui/fidget.nvim',
-      opts = {},
-    },
+    -- {
+    --   'j-hui/fidget.nvim',
+    --   opts = {},
+    -- },
     {
       'folke/neodev.nvim',
       opts = {},
