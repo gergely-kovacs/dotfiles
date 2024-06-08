@@ -25,6 +25,7 @@ return {
     })
   end,
   -- FIXME: check out why gitsigns does not attach to the current buffer
+  -- consider replacing with mini.diff
   on_attach = function(buffer)
     local gs = package.loaded.gitsigns
 

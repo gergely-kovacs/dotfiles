@@ -1,12 +1,11 @@
--- Fuzzy Finder (files, lsp, etc)
 return {
   'nvim-telescope/telescope.nvim',
   event = 'VimEnter',
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'stevearc/dressing.nvim',
     'nvim-tree/nvim-web-devicons',
+    'folke/noice.nvim',
     'folke/which-key.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
@@ -39,6 +38,7 @@ return {
     }
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
+    pcall(require('telescope').load_extension, 'session-lens')
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'

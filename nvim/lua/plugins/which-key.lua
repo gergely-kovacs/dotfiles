@@ -14,6 +14,10 @@ return {
         name = '[Q]uit',
         _ = 'which_key_ignore',
       },
+      ['<leader>l'] = {
+        name = '[L]SP',
+        _ = 'which_key_ignore',
+      },
     }
   end,
 }
