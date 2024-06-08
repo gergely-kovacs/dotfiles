@@ -67,5 +67,8 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 13
 
+-- Max entries in the popup menu
+vim.opt.pumheight = 13
+
 -- Set highlight on search, remove highlight with <esc>
 vim.opt.hlsearch = true
