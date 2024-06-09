@@ -72,3 +72,8 @@ vim.opt.pumheight = 13
 
 -- Set highlight on search, remove highlight with <esc>
 vim.opt.hlsearch = true
+
+-- modeline settings
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true

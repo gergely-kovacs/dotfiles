@@ -15,10 +15,9 @@ return {
         down = '<M-j>',
         up = '<M-k>',
 
-        -- FIXME: does not always move in normal mode
         -- Move current line in Normal mode
-        line_left = '',
-        line_right = '',
+        line_left = '<M-h>',
+        line_right = '<M-l>',
         line_down = '<M-j>',
         line_up = '<M-k>',
       },

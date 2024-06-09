@@ -3,6 +3,13 @@ return {
   event = 'BufReadPost',
   opts = {},
   keys = {
-    { '<leader>lr', '<cmd>IncRename<cr>', desc = 'Incremental [R]ename' },
+    {
+      '<leader>lr',
+      function()
+        return ':IncRename ' .. vim.fn.expand '<cword>'
+      end,
+      desc = 'Incremental [R]ename',
+      expr = true,
+    },
   },
 }

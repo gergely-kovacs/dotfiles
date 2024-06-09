@@ -47,8 +47,6 @@ return {
         map('<leader>lw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace Symbols')
         -- map('<leader>lr', vim.lsp.buf.rename, '[R]ename')
         map('<leader>la', vim.lsp.buf.code_action, '[A]ctions')
-        map('K', vim.lsp.buf.hover, 'Hover Documentation')
-        vim.keymap.set('i', '<c-k>', vim.lsp.buf.signature_help, { desc = 'Signature Help' })
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.

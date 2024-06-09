@@ -3,36 +3,54 @@ return {
   dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
-  opts = {
-    sections = {
-      lualine_a = {
-        'mode',
+  config = function()
+    local line_count = function()
+      local total_lines = vim.fn.line '$'
+      return total_lines .. '≣'
+    end
+
+    local show_macro_recording = function()
+      local recording_register = vim.fn.reg_recording()
+      if recording_register == '' then
+        return ''
+      else
+        return 'Rec @' .. recording_register
+      end
+    end
+
+    require('lualine').setup {
+      sections = {
+        lualine_a = {
+          'mode',
+          show_macro_recording,
+        },
+        lualine_b = {
+          { 'filename', path = 1 },
+        },
+        lualine_c = {
+          'branch',
+          'diff',
+        },
+        lualine_x = {
+          'diagnostics',
+          'filetype',
+        },
+        lualine_y = {
+          'encoding',
+          'fileformat',
+        },
+        lualine_z = {
+          'location',
+          'progress',
+          line_count,
+        },
       },
-      lualine_b = {
-        { 'filename', path = 1 },
+      extensions = {
+        'oil',
+        'lazy',
+        'mason',
+        'trouble',
       },
-      lualine_c = {
-        'branch',
-        'diff',
-      },
-      lualine_x = {
-        'diagnostics',
-      },
-      lualine_y = {
-        'fileformat',
-        'encoding',
-        'filetype',
-      },
-      lualine_z = {
-        'location',
-        'progress',
-      },
-    },
-    extensions = {
-      'oil',
-      'lazy',
-      'mason',
-      'trouble',
-    },
-  },
+    }
+  end,
 }

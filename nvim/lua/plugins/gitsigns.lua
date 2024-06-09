@@ -10,6 +10,7 @@ return {
       changedelete = { text = '▎' },
       untracked = { text = '▎' },
     },
+    attach_to_untracked = true,
   },
   init = function()
     local gs = require 'gitsigns'
@@ -30,6 +31,7 @@ return {
     map("n", "<leader>gu", gs.undo_stage_hunk, "[U]ndo Stage Hunk")
     map("n", "<leader>gp", gs.preview_hunk_inline, "[P]review Hunk Inline")
     map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "[B]lame Line")
+    map("n", "<leader>gB", gs.toggle_current_line_blame, "Toggle Current Line Blame")
     map("n", "<leader>gd", gs.diffthis, "[D]iff This")
     map("n", "<leader>gD", function() gs.diffthis("~") end, "Diff This ~")
     map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
