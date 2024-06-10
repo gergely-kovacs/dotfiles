@@ -37,5 +37,25 @@ return {
         suffix_next = 'n', -- Suffix to search with "next" method
       },
     }
+
+    require('mini.indentscope').setup {
+      draw = {
+        delay = 0,
+        animation = require('mini.indentscope').gen_animation.none(),
+        priority = 2,
+      },
+      mappings = {
+        object_scope = 'ii',
+        object_scope_with_border = 'ai',
+        goto_top = '[i',
+        goto_bottom = ']i',
+      },
+      options = {
+        border = 'both',
+        indent_at_cursor = false,
+        try_as_border = true,
+      },
+      symbol = '▏',
+    }
   end,
 }
