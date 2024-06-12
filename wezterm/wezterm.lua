@@ -28,7 +28,7 @@ config.keys = {
     action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
   },
   {
-    key = 'z',
+    key = 'm',
     mods = 'LEADER',
     action = wezterm.action.TogglePaneZoomState,
   },
