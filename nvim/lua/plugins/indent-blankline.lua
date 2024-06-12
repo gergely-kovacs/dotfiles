@@ -7,9 +7,11 @@ return {
     'nvim-treesitter/nvim-treesitter',
   },
   opts = function(_, opts)
+    --[[ NOTE: If you want ibl to skip processing blank lines altogether,
+    -- remove the conditional block that breaks the whitespace removal loop in ibl.init.
+    -- The section starts with: `-- remove blankline trail` ]]
     ---@type ibl.config
     local custom_opts = {
-      -- FIXME: remove the indentation on blank lines
       indent = {
         char = '',
       },
@@ -17,7 +19,7 @@ return {
         enabled = false,
       },
       whitespace = {
-        remove_blankline_trail = false,
+        remove_blankline_trail = true,
       },
     }
 
@@ -34,7 +36,7 @@ return {
         0xfaeb36,
         -- 0x79c314,
         0x487de7,
-        0x4b369d,
+        -- 0x4b369d,
         0x70369d,
       },
     })

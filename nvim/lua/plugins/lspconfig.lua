@@ -19,7 +19,7 @@ return {
   },
   opts = {
     inlay_hints = {
-      enabled = true,
+      enabled = false,
     },
     codelens = {
       enabled = true,
@@ -34,7 +34,7 @@ return {
         local map = function(keys, func, desc)
           vim.keymap.set('n', keys, func, {
             buffer = event.buf,
-            desc = desc,
+            desc = '[LSP] ' .. desc,
           })
         end
 
