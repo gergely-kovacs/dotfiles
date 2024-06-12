@@ -81,15 +81,6 @@ return {
             end,
           })
         end
-
-        -- The following autocommand is used to enable inlay hints in your
-        -- code, if the language server you are using supports them
-        -- This may be unwanted, since they displace some of your code
-        if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-          map('<leader>li', function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-          end, 'Toggle [I]nlay Hints')
-        end
       end,
     })
 
@@ -132,6 +123,8 @@ return {
     require('mason-tool-installer').setup {
       ensure_installed = ensure_installed,
     }
+
+    require('lspconfig').gleam.setup {}
 
     require('mason-lspconfig').setup {
       handlers = {
