@@ -4,7 +4,7 @@ return {
   config = function()
     local neocodeium = require 'neocodeium'
 
-    neocodeium.setup { debounce = true }
+    neocodeium.setup {}
 
     vim.keymap.set('i', '<m-e>', neocodeium.clear)
     vim.keymap.set('i', '<m-y>', neocodeium.accept)
