@@ -22,7 +22,7 @@ return {
       enabled = false,
     },
     codelens = {
-      enabled = false,
+      enabled = true,
     },
     document_highlight = {
       enabled = true,
@@ -90,12 +90,8 @@ return {
     local servers = {
       -- clangd = {},
       gopls = {},
-      -- pyright = {},
+      pyright = {},
       rust_analyzer = {},
-      -- Some languages (like typescript) have entire language plugins that can be useful:
-      --    https://github.com/pmizio/typescript-tools.nvim
-      -- But for many setups, the LSP (`tsserver`) will work just fine
-      -- tsserver = {},
 
       lua_ls = {
         settings = {
@@ -109,6 +105,27 @@ return {
           },
         },
       },
+
+      -- pylsp = {
+      --   plugins = {
+      --     -- formatter options
+      --     ruff = { enabled = true },
+      --     black = { enabled = false },
+      --     autopep8 = { enabled = false },
+      --     yapf = { enabled = false },
+      --     -- linter options
+      --     pylint = { enabled = true, executable = 'pylint' },
+      --     pyflakes = { enabled = false },
+      --     flake8 = { enabled = false },
+      --     pycodestyle = { enabled = false },
+      --     -- type checker
+      --     pylsp_mypy = { enabled = true },
+      --     -- auto-completion options
+      --     jedi_completion = { fuzzy = true },
+      --     -- import sorting
+      --     pyls_isort = { enabled = true },
+      --   },
+      -- },
     }
 
     require('mason').setup()

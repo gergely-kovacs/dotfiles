@@ -1,4 +1,3 @@
--- Autocompletion
 return {
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
@@ -24,7 +23,6 @@ return {
         },
       },
     },
-    'monkoose/neocodeium',
     'saadparwaiz1/cmp_luasnip',
     'neovim/nvim-lspconfig',
     'hrsh7th/cmp-nvim-lsp',
@@ -35,19 +33,8 @@ return {
   config = function()
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
-    local neocodeium = require 'neocodeium'
-    local commands = require 'neocodeium.commands'
 
     luasnip.config.setup {}
-
-    cmp.event:on('menu_opened', function()
-      commands.disable()
-      neocodeium.clear()
-    end)
-
-    cmp.event:on('menu_closed', function()
-      commands.enable()
-    end)
 
     cmp.setup {
       snippet = {
@@ -56,7 +43,6 @@ return {
         end,
       },
       completion = {
-        autocomplete = false,
         completeopt = 'menu,menuone,noinsert',
       },
       mapping = {
