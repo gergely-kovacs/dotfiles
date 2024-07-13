@@ -6,11 +6,9 @@ return {
     'folke/which-key.nvim',
   },
   init = function()
-    require('which-key').register {
-      ['<leader>s'] = {
-        name = '[S]pectre',
-        _ = 'which_key_ignore',
-      },
+    require('which-key').add {
+      { '<leader>s', group = '[S]pectre' },
+      { '<leader>s_', hidden = true },
     }
 
     vim.keymap.set('n', '<leader>ss', '<cmd>lua require("spectre").toggle()<CR>', {

@@ -8,11 +8,9 @@ return {
     use_diagnostic_signs = true,
   },
   init = function()
-    require('which-key').register {
-      ['<leader>t'] = {
-        name = '[T]rouble',
-        _ = 'which_key_ignore',
-      },
+    require('which-key').add {
+      { '<leader>t', group = '[T]rouble' },
+      { '<leader>t_', hidden = true },
     }
   end,
   keys = {

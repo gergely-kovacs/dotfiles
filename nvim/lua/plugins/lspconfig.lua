@@ -22,13 +22,13 @@ return {
       enabled = false,
     },
     codelens = {
-      enabled = true,
+      enabled = false,
     },
     document_highlight = {
       enabled = true,
     },
   },
-  config = function()
+  config = function(_, opts)
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(event)
         local map = function(keys, func, desc)

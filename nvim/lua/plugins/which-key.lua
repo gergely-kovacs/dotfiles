@@ -1,27 +1,32 @@
 return {
   'folke/which-key.nvim',
-  event = 'VimEnter',
-  config = function()
-    require('which-key').setup()
-
-    -- Document existing key chains
-    require('which-key').register {
-      ['<leader>w'] = {
-        name = '[W]rite',
-        _ = 'which_key_ignore',
-      },
-      ['<leader>q'] = {
-        name = '[Q]uit',
-        _ = 'which_key_ignore',
-      },
-      ['<leader>l'] = {
-        name = '[L]SP',
-        _ = 'which_key_ignore',
-      },
-      ['<leader>g'] = {
-        name = '[G]it',
-        _ = 'which_key_ignore',
-      },
+  event = 'VeryLazy',
+  ---@class wk.Opts
+  opts = {
+    preset = 'helix',
+    icons = {
+      rules = false,
+    },
+  },
+  keys = {
+    {
+      '<leader>?',
+      function()
+        require('which-key').show { global = false }
+      end,
+      desc = 'Buffer Local Keymaps (which-key)',
+    },
+  },
+  init = function()
+    require('which-key').add {
+      { '<leader>g', group = '[G]it' },
+      { '<leader>g_', hidden = true },
+      { '<leader>l', group = '[L]SP' },
+      { '<leader>l_', hidden = true },
+      { '<leader>q', group = '[Q]uit' },
+      { '<leader>q_', hidden = true },
+      { '<leader>w', group = '[W]rite' },
+      { '<leader>w_', hidden = true },
     }
   end,
 }

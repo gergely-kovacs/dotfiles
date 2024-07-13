@@ -20,11 +20,9 @@ return {
     },
   },
   config = function()
-    require('which-key').register {
-      ['<leader>f'] = {
-        name = '[F]ind',
-        _ = 'which_key_ignore',
-      },
+    require('which-key').add {
+      { '<leader>f', group = '[F]ind' },
+      { '<leader>f_', hidden = true },
     }
 
     require('telescope').setup {

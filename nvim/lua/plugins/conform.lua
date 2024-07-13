@@ -1,4 +1,3 @@
--- Autoformat
 return {
   'stevearc/conform.nvim',
   event = 'BufReadPost',
@@ -40,6 +39,12 @@ return {
       lua = { 'stylua' },
       javascript = { 'prettierd' },
       typescript = { 'prettierd' },
+      typescriptreact = { 'prettierd' },
+      json = { 'prettierd' },
+      yaml = { 'prettierd' },
+      html = { 'prettierd' },
+      css = { 'prettierd' },
+      markdown = { 'prettierd' },
     },
   },
 }
