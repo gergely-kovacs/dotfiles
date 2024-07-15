@@ -1,7 +1,7 @@
 return {
   'folke/which-key.nvim',
   event = 'VeryLazy',
-  ---@class wk.Opts
+  ---@type wk.Opts
   opts = {
     preset = 'helix',
     icons = {
