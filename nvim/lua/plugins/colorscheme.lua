@@ -1,12 +1,12 @@
 return {
-  'Shatur/neovim-ayu',
+  'scottmckendry/cyberdream.nvim',
+  lazy = false,
   priority = 1000,
-  opts = {
-    mirage = false, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
-    terminal = true, -- Set to `false` to let terminal manage its own colors.
-    overrides = {} -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
-  },
   config = function()
-    vim.cmd.colorscheme 'ayu-dark'
+    require('cyberdream').setup {
+      italic_comments = true,
+      borderless_telescope = false,
+    }
+    vim.cmd 'colorscheme cyberdream'
   end,
 }

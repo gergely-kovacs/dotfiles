@@ -18,9 +18,6 @@ return {
       scope = {
         enabled = false,
       },
-      whitespace = {
-        remove_blankline_trail = true,
-      },
     }
 
     opts = vim.tbl_deep_extend('force', opts, custom_opts)

@@ -12,6 +12,6 @@ return {
     end,
   },
   init = function()
-    vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle!<CR>')
+    vim.keymap.set('n', '<leader>a', '<cmd>[A]erialToggle!<CR>')
   end,
 }
