@@ -5,7 +5,6 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
-    'folke/noice.nvim',
     'folke/which-key.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
@@ -19,6 +18,19 @@ return {
       end,
     },
   },
+  keys = {
+    { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = '[B]uffers' },
+    { '<leader>fc', '<cmd>Telescope git_commits<cr>', desc = '[C]ommits' },
+    { '<leader>fd', '<cmd>Telescope diagnostics<cr>', desc = '[D]iagnostics' },
+    { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = '[F]iles' },
+    { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = '[G]rep' },
+    { '<leader>fh', '<cmd>Telescope help_tags<cr>', desc = '[H]elp' },
+    { '<leader>fk', '<cmd>Telescope keymaps<cr>', desc = '[K]eymaps' },
+    { '<leader>fr', '<cmd>Telescope resume<cr>', desc = '[R]esume' },
+    { '<leader>ft', '<cmd>Telescope builtin<cr>', desc = '[T]elescope' },
+    { '<leader>fw', '<cmd>Telescope grep_string<cr>', desc = '[W]ord' },
+    { '<leader>f.', '<cmd>Telescope oldfiles<cr>', desc = 'Recent files' },
+  },
   config = function()
     require('which-key').add {
       { '<leader>f', group = '[F]ind' },
@@ -26,50 +38,26 @@ return {
     }
 
     require('telescope').setup {
-      -- defaults = {
-      --   mappings = {
-      --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-      --   },
-      -- },
-      -- pickers = {}
-      extensions = {},
+      pickers = {
+        find_files = {
+          file_ignore_patterns = { 'node_modules', '.git', '.venv' },
+          theme = 'dropdown',
+          hidden = true,
+        },
+        live_grep = {
+          file_ignore_patterns = { 'node_modules', '.git', '.venv' },
+          additional_args = function(_)
+            return { '--hidden' }
+          end,
+        },
+      },
     }
+
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
-    pcall(require('telescope').load_extension, 'session-lens')
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>fh', builtin.help_tags, {
-      desc = '[H]elp',
-    })
-    vim.keymap.set('n', '<leader>fk', builtin.keymaps, {
-      desc = '[K]eymaps',
-    })
-    vim.keymap.set('n', '<leader>ff', '<cmd>lua require "telescope.builtin".find_files { hidden = true }<cr>', {
-      desc = '[F]iles',
-    })
-    vim.keymap.set('n', '<leader>ft', builtin.builtin, {
-      desc = '[T]elescope',
-    })
-    vim.keymap.set('n', '<leader>fw', builtin.grep_string, {
-      desc = '[W]ord (current)',
-    })
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, {
-      desc = '[G]rep',
-    })
-    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {
-      desc = '[D]iagnostics',
-    })
-    vim.keymap.set('n', '<leader>fr', builtin.resume, {
-      desc = '[R]esume',
-    })
-    vim.keymap.set('n', '<leader>f.', builtin.oldfiles, {
-      desc = 'Recent Files',
-    })
-    vim.keymap.set('n', '<leader><leader>', builtin.buffers, {
-      desc = 'Find existing buffers',
-    })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()
@@ -80,26 +68,6 @@ return {
       })
     end, {
       desc = 'Grep Current Buffer',
-    })
-
-    -- It's also possible to pass additional configuration options.
-    --  See `:help telescope.builtin.live_grep()` for information about particular keys
-    vim.keymap.set('n', '<leader>f/', function()
-      builtin.live_grep {
-        grep_open_files = true,
-        prompt_title = 'Live Grep in Open Files',
-      }
-    end, {
-      desc = 'Grep Open Files',
-    })
-
-    -- Shortcut for searching your Neovim configuration files
-    vim.keymap.set('n', '<leader>fn', function()
-      builtin.find_files {
-        cwd = vim.fn.stdpath 'config',
-      }
-    end, {
-      desc = '[N]eovim Files',
     })
   end,
 }

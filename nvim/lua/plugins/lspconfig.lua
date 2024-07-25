@@ -16,6 +16,7 @@ return {
       'folke/neodev.nvim',
       opts = {},
     },
+    'nvim-telescope/telescope.nvim',
   },
   opts = {
     inlay_hints = {
@@ -28,7 +29,7 @@ return {
       enabled = true,
     },
   },
-  config = function(_, opts)
+  config = function()
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(event)
         local map = function(keys, func, desc)
@@ -46,7 +47,7 @@ return {
         map('<leader>ld', require('telescope.builtin').lsp_document_symbols, '[D]ocument Symbols')
         map('<leader>lw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace Symbols')
         -- map('<leader>lr', vim.lsp.buf.rename, '[R]ename')
-        map('<leader>la', vim.lsp.buf.code_action, '[A]ctions')
+        -- map('<leader>la', vim.lsp.buf.code_action, '[A]ctions')
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.

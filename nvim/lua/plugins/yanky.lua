@@ -4,7 +4,6 @@ return {
   dependencies = {
     'nvim-telescope/telescope.nvim',
   },
-  opts = {},
   keys = {
     {
       '<leader>fy',
@@ -21,4 +20,8 @@ return {
     { ']y', '<Plug>(YankyCycleForward)', desc = 'Cycle Forward Through Yank History' },
     { '[y', '<Plug>(YankyCycleBackward)', desc = 'Cycle Backward Through Yank History' },
   },
+  config = function()
+    require('yanky').setup()
+    require('telescope').load_extension 'yank_history'
+  end,
 }
