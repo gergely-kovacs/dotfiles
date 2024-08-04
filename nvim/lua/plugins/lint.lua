@@ -12,7 +12,6 @@ return {
       typescriptreact = { 'eslint_d' },
       json = { 'jsonlint' },
       yaml = { 'yamllint' },
-      -- html = { 'tidy' },
       css = { 'stylelint' },
     }
 

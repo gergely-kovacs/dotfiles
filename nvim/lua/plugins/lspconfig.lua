@@ -89,11 +89,12 @@ return {
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     local servers = {
-      -- clangd = {},
       gopls = {},
       pyright = {},
+      ruff = {},
       rust_analyzer = {},
-
+      tsserver = {},
+      tailwindcss = {},
       lua_ls = {
         settings = {
           Lua = {
@@ -106,27 +107,6 @@ return {
           },
         },
       },
-
-      -- pylsp = {
-      --   plugins = {
-      --     -- formatter options
-      --     ruff = { enabled = true },
-      --     black = { enabled = false },
-      --     autopep8 = { enabled = false },
-      --     yapf = { enabled = false },
-      --     -- linter options
-      --     pylint = { enabled = true, executable = 'pylint' },
-      --     pyflakes = { enabled = false },
-      --     flake8 = { enabled = false },
-      --     pycodestyle = { enabled = false },
-      --     -- type checker
-      --     pylsp_mypy = { enabled = true },
-      --     -- auto-completion options
-      --     jedi_completion = { fuzzy = true },
-      --     -- import sorting
-      --     pyls_isort = { enabled = true },
-      --   },
-      -- },
     }
 
     require('mason').setup()
