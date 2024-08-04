@@ -20,13 +20,16 @@ return {
   },
   opts = {
     inlay_hints = {
-      enabled = false,
+      enabled = true,
     },
     codelens = {
-      enabled = false,
+      enabled = true,
     },
     document_highlight = {
       enabled = true,
+    },
+    ui = {
+      border = 'rounded',
     },
   },
   config = function()
@@ -88,12 +91,41 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+    local function organize_imports()
+      local params = {
+        command = '_typescript.organizeImports',
+        arguments = { vim.api.nvim_buf_get_name(0) },
+        title = '',
+      }
+      vim.lsp.buf.execute_command(params)
+    end
+
     local servers = {
       gopls = {},
       pyright = {},
       ruff = {},
       rust_analyzer = {},
-      tsserver = {},
+      tsserver = {
+        init_options = {
+          preferences = {
+            importModuleSpecifierPreference = 'project-relative',
+          },
+        },
+        on_attach = function(_, bufnr)
+          vim.keymap.set(
+            'n',
+            '<leader>o',
+            '<cmd>TSOrganizeImports<cr>',
+            { buffer = bufnr, desc = '[O]rganize Imports' }
+          )
+        end,
+        commands = {
+          TSOrganizeImports = {
+            organize_imports,
+            description = 'Organize Imports',
+          },
+        },
+      },
       tailwindcss = {},
       lua_ls = {
         settings = {
