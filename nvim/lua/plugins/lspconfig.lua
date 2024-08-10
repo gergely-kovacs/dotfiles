@@ -9,10 +9,6 @@ return {
       },
     },
     {
-      'j-hui/fidget.nvim',
-      opts = {},
-    },
-    {
       'folke/neodev.nvim',
       opts = {},
     },

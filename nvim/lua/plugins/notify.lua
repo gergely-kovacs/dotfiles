@@ -1,13 +1,12 @@
 return {
   'rcarriga/nvim-notify',
+  event = 'VeryLazy',
   dependencies = {
     'nvim-telescope/telescope.nvim',
   },
   ---@type notify.Config
   ---@diagnostic disable-next-line: missing-fields
-  opts = {
-    stages = 'static',
-  },
+  opts = {},
   keys = {
     { '<leader>fm', '<cmd>Telescope notify<cr>', desc = '[M]essages' },
     {
