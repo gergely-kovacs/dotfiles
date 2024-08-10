@@ -15,6 +15,11 @@ return {
         ['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
       },
     },
+    views = {
+      mini = {
+        timeout = 3000,
+      },
+    },
     routes = {
       {
         filter = {
