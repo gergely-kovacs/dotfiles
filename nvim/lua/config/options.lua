@@ -43,11 +43,10 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
-vim.opt.updatetime = 100
+vim.opt.updatetime = 200
 
--- Decrease mapped sequence wait time
--- Displays which-key popup sooner
-vim.opt.timeoutlen = 25
+-- Displays which-key popup instantly
+vim.opt.timeout = false
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
