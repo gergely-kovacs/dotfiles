@@ -6,7 +6,10 @@ return {
   },
   ---@type notify.Config
   ---@diagnostic disable-next-line: missing-fields
-  opts = {},
+  opts = {
+    stages = 'static',
+    timeout = 3000,
+  },
   keys = {
     { '<leader>fm', '<cmd>Telescope notify<cr>', desc = '[M]essages' },
     {
