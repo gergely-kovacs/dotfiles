@@ -23,7 +23,7 @@ vim.opt.mouse = 'a'
 vim.opt.showmode = false
 
 -- What should be included in saved sessions
-vim.opt.sessionoptions = 'buffers,curdir,folds,globals,tabpages'
+vim.opt.sessionoptions = 'buffers,curdir,folds,localoptions,globals,tabpages'
 
 -- Sync clipboard between OS and Neovim.
 -- See `:help 'clipboard'`
