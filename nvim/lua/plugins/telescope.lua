@@ -19,7 +19,7 @@ return {
     },
   },
   keys = {
-    { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = '[B]uffers' },
+    { '<leader><leader>', '<cmd>Telescope buffers<cr>', desc = 'Buffers' },
     { '<leader>fc', '<cmd>Telescope git_commits<cr>', desc = '[C]ommits' },
     { '<leader>fd', '<cmd>Telescope diagnostics<cr>', desc = '[D]iagnostics' },
     { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = '[F]iles' },
