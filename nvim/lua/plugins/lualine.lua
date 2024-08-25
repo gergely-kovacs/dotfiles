@@ -49,7 +49,6 @@ return {
         'oil',
         'lazy',
         'mason',
-        'trouble',
       },
     }
   end,
