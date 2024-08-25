@@ -87,41 +87,11 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-    local function organize_imports()
-      local params = {
-        command = '_typescript.organizeImports',
-        arguments = { vim.api.nvim_buf_get_name(0) },
-        title = '',
-      }
-      vim.lsp.buf.execute_command(params)
-    end
-
     local servers = {
       gopls = {},
       ruff = {},
       rust_analyzer = {},
       tailwindcss = {},
-      tsserver = {
-        init_options = {
-          preferences = {
-            importModuleSpecifierPreference = 'project-relative',
-          },
-        },
-        on_attach = function(_, bufnr)
-          vim.keymap.set(
-            'n',
-            '<leader>o',
-            '<cmd>TSOrganizeImports<cr>',
-            { buffer = bufnr, desc = '[O]rganize Imports' }
-          )
-        end,
-        commands = {
-          TSOrganizeImports = {
-            organize_imports,
-            description = 'Organize Imports',
-          },
-        },
-      },
       pylsp = {
         settings = {
           pylsp = {
