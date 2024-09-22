@@ -89,31 +89,20 @@ return {
 
     local servers = {
       gopls = {},
-      ruff = {},
       rust_analyzer = {},
       tailwindcss = {},
-      pylsp = {
+      ruff = {},
+      mypy = {},
+      pyright = {
         settings = {
-          pylsp = {
-            plugins = {
-              -- formatter options
-              black = { enabled = false },
-              autopep8 = { enabled = false },
-              yapf = { enabled = false },
-              -- linter options
-              pylint = { enabled = false },
-              pyflakes = { enabled = false },
-              pycodestyle = { enabled = false },
-              -- type checker
-              pylsp_mypy = { enabled = true },
-              -- auto-completion options
-              jedi_completion = { fuzzy = true },
-              -- import sorting
-              pyls_isort = { enabled = true },
+          python = {
+            analysis = {
+              typeCheckingMode = 'off',
             },
           },
         },
       },
+      stylua = {},
       lua_ls = {
         settings = {
           Lua = {
@@ -133,9 +122,6 @@ return {
     vim.keymap.set('n', '<leader>M', '<cmd>Mason<cr>', { desc = '[M]ason' })
 
     local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      'stylua',
-    })
 
     require('mason-tool-installer').setup {
       ensure_installed = ensure_installed,

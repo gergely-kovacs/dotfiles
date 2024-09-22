@@ -1,11 +1,11 @@
--- Linting
 return {
   'mfussenegger/nvim-lint',
-  event = { 'BufReadPre', 'BufNewFile' },
+  event = 'BufReadPost',
   config = function()
     local lint = require 'lint'
     lint.linters_by_ft = {
       markdown = { 'markdownlint' },
+      python = { 'mypy' },
       javascript = { 'eslint_d' },
       javascriptreact = { 'eslint_d' },
       typescript = { 'eslint_d' },
