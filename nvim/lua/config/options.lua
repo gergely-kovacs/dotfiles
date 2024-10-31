@@ -45,8 +45,9 @@ vim.opt.signcolumn = 'yes'
 -- Decrease update time
 vim.opt.updatetime = 200
 
--- Displays which-key popup instantly
-vim.opt.timeout = false
+-- Displays which-key popup sooner
+-- vim.opt.timeout = false
+vim.opt.timeoutlen = 25
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true

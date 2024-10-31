@@ -4,6 +4,7 @@ return {
   config = function()
     local lint = require 'lint'
     lint.linters_by_ft = {
+      htmldjango = { 'djlint' },
       markdown = { 'markdownlint' },
       python = { 'mypy' },
       javascript = { 'eslint_d' },

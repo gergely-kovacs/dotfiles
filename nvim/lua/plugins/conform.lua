@@ -46,6 +46,7 @@ return {
       json = { 'prettierd' },
       yaml = { 'prettierd' },
       html = { 'prettierd' },
+      htmldjango = { 'djlint' },
       css = { 'prettierd' },
       markdown = { 'prettierd' },
     },
