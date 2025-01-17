@@ -145,7 +145,10 @@ return {
 
     local lspconfig = require 'lspconfig'
     lspconfig.gleam.setup {}
-    lspconfig.gdscript.setup {}
+    lspconfig.gdscript.setup {
+      name = 'godot',
+      cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
+    }
 
     require('mason-lspconfig').setup {
       handlers = {
