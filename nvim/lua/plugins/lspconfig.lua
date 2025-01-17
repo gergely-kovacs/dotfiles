@@ -89,7 +89,23 @@ return {
 
     local servers = {
       gopls = {},
-      rust_analyzer = {},
+      rust_analyzer = {
+        settings = {
+          ['rust-analyzer'] = {
+            checkOnSave = {
+              allFeatures = true,
+              command = 'clippy',
+              extraArgs = {
+                '--',
+                '--no-deps',
+                '-Dclippy::correctness',
+                '-Dclippy::complexity',
+                '-Wclippy::perf',
+              },
+            },
+          },
+        },
+      },
       tailwindcss = {},
       ruff = {},
       mypy = {},
@@ -127,14 +143,16 @@ return {
       ensure_installed = ensure_installed,
     }
 
-    require('lspconfig').gleam.setup {}
+    local lspconfig = require 'lspconfig'
+    lspconfig.gleam.setup {}
+    lspconfig.gdscript.setup {}
 
     require('mason-lspconfig').setup {
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
+          lspconfig[server_name].setup(server)
         end,
       },
     }

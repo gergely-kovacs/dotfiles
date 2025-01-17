@@ -49,6 +49,7 @@ return {
       htmldjango = { 'djlint' },
       css = { 'prettierd' },
       markdown = { 'prettierd' },
+      gdscript = { 'gdformat' },
     },
   },
 }
