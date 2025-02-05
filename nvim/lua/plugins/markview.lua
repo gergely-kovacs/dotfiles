@@ -7,7 +7,10 @@ return {
     'nvim-tree/nvim-web-devicons',
   },
   opts = {
-    modes = { 'n', 'no', 'c' },
-    hybrid_modes = { 'n' },
+    preview = {
+      icon_provider = 'devicons',
+      hybrid_modes = { 'n' },
+      modes = { 'n', 'no', 'c' },
+    },
   },
 }
