@@ -13,7 +13,6 @@ return {
       typescriptreact = { 'eslint_d' },
       json = { 'jsonlint' },
       yaml = { 'yamllint' },
-      css = { 'stylelint' },
       gdscript = { 'gdlint' },
     }
 
