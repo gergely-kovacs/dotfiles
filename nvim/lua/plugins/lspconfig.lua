@@ -1,18 +1,15 @@
 return {
   'neovim/nvim-lspconfig',
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
+    'nvim-telescope/telescope.nvim',
+    'saghen/blink.cmp',
     {
-      'williamboman/mason.nvim',
+      'mason-org/mason-lspconfig.nvim',
       dependencies = {
-        'williamboman/mason-lspconfig.nvim',
-        'WhoIsSethDaniel/mason-tool-installer.nvim',
+        'mason-org/mason.nvim',
       },
     },
-    {
-      'folke/neodev.nvim',
-      opts = {},
-    },
-    'nvim-telescope/telescope.nvim',
   },
   opts = {
     inlay_hints = {
@@ -24,15 +21,75 @@ return {
     document_highlight = {
       enabled = true,
     },
-    ui = {
-      border = 'rounded',
+    servers = {
+      gopls = {},
+      rust_analyzer = {
+        settings = {
+          ['rust-analyzer'] = {
+            checkOnSave = {
+              allFeatures = true,
+              command = 'clippy',
+              extraArgs = {
+                '--',
+                '--no-deps',
+                '-Dclippy::correctness',
+                '-Dclippy::complexity',
+                '-Wclippy::perf',
+              },
+            },
+          },
+        },
+      },
+      tailwindcss = {},
+      ruff = {},
+      pyright = {
+        settings = {
+          python = {
+            analysis = {
+              typeCheckingMode = 'off',
+            },
+          },
+        },
+      },
+      lua_ls = {
+        settings = {
+          Lua = {
+            workspace = {
+              checkThirdParty = false,
+            },
+            completion = {
+              callSnippet = 'Replace',
+            },
+          },
+        },
+      },
     },
   },
-  config = function()
+  config = function(_, opts)
+    require('mason-lspconfig').setup {
+      automatic_enable = false,
+      ensure_installed = vim.tbl_keys(opts.servers),
+    }
+
+    local lspconfig = require 'lspconfig'
+
+    for server, config in pairs(opts.servers) do
+      config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+      lspconfig[server].setup(config)
+    end
+
+    lspconfig.gleam.setup {}
+
+    lspconfig.gdscript.setup {
+      name = 'godot',
+      cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
+    }
+
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(event)
-        local map = function(keys, func, desc)
-          vim.keymap.set('n', keys, func, {
+        local map = function(keys, func, desc, mode)
+          mode = mode or 'n'
+          vim.keymap.set(mode, keys, func, {
             buffer = event.buf,
             desc = '[LSP] ' .. desc,
           })
@@ -41,12 +98,8 @@ return {
         map('gy', require('telescope.builtin').lsp_type_definitions, 'T[y]pe Definition')
         map('gd', vim.lsp.buf.definition, '[D]efinition')
         map('gD', vim.lsp.buf.declaration, 'Declaration')
-        map('gr', require('telescope.builtin').lsp_references, '[R]eferences')
-        map('gI', require('telescope.builtin').lsp_implementations, 'Implementation')
         map('<leader>ld', require('telescope.builtin').lsp_document_symbols, '[D]ocument Symbols')
         map('<leader>lw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace Symbols')
-        -- map('<leader>lr', vim.lsp.buf.rename, '[R]ename')
-        map('<leader>la', vim.lsp.buf.code_action, '[A]ctions')
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
@@ -83,81 +136,5 @@ return {
         end
       end,
     })
-
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-
-    local servers = {
-      gopls = {},
-      rust_analyzer = {
-        settings = {
-          ['rust-analyzer'] = {
-            checkOnSave = {
-              allFeatures = true,
-              command = 'clippy',
-              extraArgs = {
-                '--',
-                '--no-deps',
-                '-Dclippy::correctness',
-                '-Dclippy::complexity',
-                '-Wclippy::perf',
-              },
-            },
-          },
-        },
-      },
-      tailwindcss = {},
-      ruff = {},
-      mypy = {},
-      pyright = {
-        settings = {
-          python = {
-            analysis = {
-              typeCheckingMode = 'off',
-            },
-          },
-        },
-      },
-      stylua = {},
-      lua_ls = {
-        settings = {
-          Lua = {
-            workspace = {
-              checkThirdParty = false,
-            },
-            completion = {
-              callSnippet = 'Replace',
-            },
-          },
-        },
-      },
-    }
-
-    require('mason').setup()
-
-    vim.keymap.set('n', '<leader>M', '<cmd>Mason<cr>', { desc = '[M]ason' })
-
-    local ensure_installed = vim.tbl_keys(servers or {})
-
-    require('mason-tool-installer').setup {
-      ensure_installed = ensure_installed,
-    }
-
-    local lspconfig = require 'lspconfig'
-    lspconfig.gleam.setup {}
-    lspconfig.gdscript.setup {
-      name = 'godot',
-      cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
-    }
-
-    require('mason-lspconfig').setup {
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          lspconfig[server_name].setup(server)
-        end,
-      },
-    }
   end,
 }
