@@ -39,7 +39,7 @@ return {
         end
 
         map('gy', require('telescope.builtin').lsp_type_definitions, 'T[y]pe Definition')
-        map('gd', require('telescope.builtin').lsp_definitions, '[D]efinition')
+        map('gd', vim.lsp.buf.definition, '[D]efinition')
         map('gD', vim.lsp.buf.declaration, 'Declaration')
         map('gr', require('telescope.builtin').lsp_references, '[R]eferences')
         map('gI', require('telescope.builtin').lsp_implementations, 'Implementation')
