@@ -17,13 +17,18 @@ return {
         return vim.fn.executable 'make' == 1
       end,
     },
+    {
+      'nvim-telescope/telescope-live-grep-args.nvim',
+      version = '^1.0.0',
+    },
   },
   keys = {
     { '<leader><leader>', '<cmd>Telescope buffers<cr>', desc = 'Buffers' },
     { '<leader>fc', '<cmd>Telescope git_commits<cr>', desc = '[C]ommits' },
     { '<leader>fd', '<cmd>Telescope diagnostics<cr>', desc = '[D]iagnostics' },
     { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = '[F]iles' },
-    { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = '[G]rep' },
+    -- { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = '[G]rep' },
+    { '<leader>fg', ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', desc = '[G]rep' },
     { '<leader>fh', '<cmd>Telescope help_tags<cr>', desc = '[H]elp' },
     { '<leader>fk', '<cmd>Telescope keymaps<cr>', desc = '[K]eymaps' },
     { '<leader>fr', '<cmd>Telescope resume<cr>', desc = '[R]esume' },
@@ -37,24 +42,31 @@ return {
       { '<leader>f_', hidden = true },
     }
 
-    require('telescope').setup {
-      pickers = {
-        find_files = {
-          file_ignore_patterns = { 'node_modules', '.git', '.venv' },
-          theme = 'dropdown',
-          hidden = true,
-        },
-        live_grep = {
+    local telescope = require 'telescope'
+
+    telescope.setup {
+      extensions = {
+        fzf = {},
+        live_grep_args = {
+          auto_quoting = false,
+          theme = 'ivy',
           file_ignore_patterns = { 'node_modules', 'package%-lock.json', '.git', '.venv' },
           additional_args = function(_)
             return { '--hidden' }
           end,
         },
       },
+      pickers = {
+        find_files = {
+          file_ignore_patterns = { 'node_modules', '.git', '.venv' },
+          theme = 'dropdown',
+          hidden = true,
+        },
+      },
     }
 
-    -- Enable Telescope extensions if they are installed
-    pcall(require('telescope').load_extension, 'fzf')
+    telescope.load_extension 'fzf'
+    telescope.load_extension 'live_grep_args'
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
