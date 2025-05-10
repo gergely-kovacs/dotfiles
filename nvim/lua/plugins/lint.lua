@@ -6,7 +6,6 @@ return {
     lint.linters_by_ft = {
       htmldjango = { 'djlint' },
       markdown = { 'markdownlint' },
-      python = { 'mypy' },
       javascript = { 'eslint_d' },
       javascriptreact = { 'eslint_d' },
       typescript = { 'eslint_d' },
