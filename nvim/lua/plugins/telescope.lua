@@ -7,6 +7,13 @@ return {
     'nvim-tree/nvim-web-devicons',
     'folke/which-key.nvim',
     {
+      'nvim-telescope/telescope-dap.nvim',
+      dependencies = {
+        'mfussenegger/nvim-dap',
+        'HUAHUAI23/telescope-dapzzzz',
+      },
+    },
+    {
       'nvim-telescope/telescope-fzf-native.nvim',
       -- `build` is used to run some command when the plugin is installed/updated.
       -- This is only run then, not every time Neovim starts up.
@@ -56,6 +63,8 @@ return {
 
     telescope.setup {
       extensions = {
+        dap = {},
+        i23 = {},
         fzf = {},
         git_file_history = {},
         live_grep_args = {
@@ -78,6 +87,8 @@ return {
       },
     }
 
+    telescope.load_extension 'dap'
+    telescope.load_extension 'i23'
     telescope.load_extension 'fzf'
     telescope.load_extension 'live_grep_args'
     telescope.load_extension 'git_file_history'
