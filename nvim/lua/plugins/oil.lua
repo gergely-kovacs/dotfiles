@@ -1,7 +1,6 @@
 return {
   'stevearc/oil.nvim',
   opts = {
-    git = true,
     view_options = {
       show_hidden = true,
     },
