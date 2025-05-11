@@ -21,10 +21,18 @@ return {
       'nvim-telescope/telescope-live-grep-args.nvim',
       version = '^1.0.0',
     },
+    {
+      'isak102/telescope-git-file-history.nvim',
+      dependencies = {
+        'nvim-lua/plenary.nvim',
+        'tpope/vim-fugitive',
+      },
+    },
   },
   keys = {
     { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = '[B]uffers' },
-    { '<leader>fc', '<cmd>Telescope git_bcommits<cr>', desc = '[C]ommits (File)' },
+    -- { '<leader>fc', '<cmd>Telescope git_bcommits<cr>', desc = '[C]ommits (File)' },
+    { '<leader>fc', '<cmd>Telescope git_file_history<cr>', desc = '[C]ommits (File)' },
     { '<leader>fC', '<cmd>Telescope git_commits<cr>', desc = 'Commits (Repo)' },
     { '<leader>fd', '<cmd>Telescope diagnostics<cr>', desc = '[D]iagnostics' },
     { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = '[F]iles' },
@@ -49,6 +57,7 @@ return {
     telescope.setup {
       extensions = {
         fzf = {},
+        git_file_history = {},
         live_grep_args = {
           auto_quoting = false,
           theme = 'ivy',
@@ -70,5 +79,7 @@ return {
     }
 
     telescope.load_extension 'fzf'
+    telescope.load_extension 'live_grep_args'
+    telescope.load_extension 'git_file_history'
   end,
 }
