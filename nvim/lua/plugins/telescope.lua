@@ -17,18 +17,13 @@ return {
         return vim.fn.executable 'make' == 1
       end,
     },
-    {
-      'nvim-telescope/telescope-live-grep-args.nvim',
-      version = '^1.0.0',
-    },
   },
   keys = {
     { '<leader><leader>', '<cmd>Telescope buffers<cr>', desc = 'Buffers' },
     { '<leader>fc', '<cmd>Telescope git_bcommits<cr>', desc = '[C]ommits' },
     { '<leader>fd', '<cmd>Telescope diagnostics<cr>', desc = '[D]iagnostics' },
     { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = '[F]iles' },
-    -- { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = '[G]rep' },
-    { '<leader>fg', ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', desc = '[G]rep' },
+    { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = '[G]rep' },
     { '<leader>fh', '<cmd>Telescope help_tags<cr>', desc = '[H]elp' },
     { '<leader>fk', '<cmd>Telescope keymaps<cr>', desc = '[K]eymaps' },
     { '<leader>fr', '<cmd>Telescope resume<cr>', desc = '[R]esume' },
@@ -47,20 +42,20 @@ return {
     telescope.setup {
       extensions = {
         fzf = {},
-        live_grep_args = {
-          auto_quoting = false,
-          theme = 'ivy',
-          file_ignore_patterns = { 'node_modules', 'package%-lock.json', '.git', '.venv' },
-          additional_args = function(_)
-            return { '--hidden' }
-          end,
-        },
       },
       pickers = {
         find_files = {
           file_ignore_patterns = { 'node_modules', '.git', '.venv' },
           theme = 'dropdown',
           hidden = true,
+        },
+        -- TODO: make a custom command that can pass arguments to rg
+        live_grep = {
+          theme = 'ivy',
+          file_ignore_patterns = { 'node_modules', 'package%-lock.json', '.git', '.venv' },
+          additional_args = function(_)
+            return { '--hidden' }
+          end,
         },
       },
     }
@@ -72,7 +67,7 @@ return {
     local builtin = require 'telescope.builtin'
 
     -- Slightly advanced example of overriding default behavior and theme
-    vim.keymap.set('n', '<leader>/', function()
+    vim.keymap.set('n', '<leader>f/', function()
       -- You can pass additional configuration to Telescope to change the theme, layout, etc.
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
         winblend = 10,
