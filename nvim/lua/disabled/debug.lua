@@ -1,3 +1,4 @@
+-- TODO: check out https://github.com/nvim-telescope/telescope-dap.nvim
 return {
   'mfussenegger/nvim-dap',
   dependencies = {

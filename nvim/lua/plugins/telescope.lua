@@ -19,11 +19,12 @@ return {
     },
   },
   keys = {
-    { '<leader><leader>', '<cmd>Telescope buffers<cr>', desc = 'Buffers' },
+    { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = '[B]uffers' },
     { '<leader>fc', '<cmd>Telescope git_bcommits<cr>', desc = '[C]ommits' },
     { '<leader>fd', '<cmd>Telescope diagnostics<cr>', desc = '[D]iagnostics' },
     { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = '[F]iles' },
     { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = '[G]rep' },
+    { '<leader>fl', '<cmd>Telescope current_buffer_fuzzy_find<cr>', desc = '[L]ines' },
     { '<leader>fh', '<cmd>Telescope help_tags<cr>', desc = '[H]elp' },
     { '<leader>fk', '<cmd>Telescope keymaps<cr>', desc = '[K]eymaps' },
     { '<leader>fr', '<cmd>Telescope resume<cr>', desc = '[R]esume' },
@@ -44,15 +45,17 @@ return {
         fzf = {},
       },
       pickers = {
+        current_buffer_fuzzy_find = {
+          theme = 'dropdown',
+        },
         find_files = {
-          file_ignore_patterns = { 'node_modules', '.git', '.venv' },
           theme = 'dropdown',
           hidden = true,
         },
         -- TODO: make a custom command that can pass arguments to rg
         live_grep = {
           theme = 'ivy',
-          file_ignore_patterns = { 'node_modules', 'package%-lock.json', '.git', '.venv' },
+          file_ignore_patterns = { 'package%-lock%.json' },
           additional_args = function(_)
             return { '--hidden' }
           end,
@@ -61,19 +64,5 @@ return {
     }
 
     telescope.load_extension 'fzf'
-
-    -- See `:help telescope.builtin`
-    local builtin = require 'telescope.builtin'
-
-    -- Slightly advanced example of overriding default behavior and theme
-    vim.keymap.set('n', '<leader>f/', function()
-      -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-        winblend = 10,
-        previewer = false,
-      })
-    end, {
-      desc = 'Grep Current Buffer',
-    })
   end,
 }
