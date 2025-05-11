@@ -1,8 +1,12 @@
 return {
   'stevearc/oil.nvim',
   opts = {
+    git = true,
+    view_options = {
+      show_hidden = true,
+    },
     win_options = {
-      signcolumn = 'yes:1',
+      signcolumn = 'yes:2',
     },
   },
   init = function()
