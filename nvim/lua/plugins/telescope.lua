@@ -24,7 +24,8 @@ return {
   },
   keys = {
     { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = '[B]uffers' },
-    { '<leader>fc', '<cmd>Telescope git_bcommits<cr>', desc = '[C]ommits' },
+    { '<leader>fc', '<cmd>Telescope git_bcommits<cr>', desc = '[C]ommits (File)' },
+    { '<leader>fC', '<cmd>Telescope git_commits<cr>', desc = 'Commits (Repo)' },
     { '<leader>fd', '<cmd>Telescope diagnostics<cr>', desc = '[D]iagnostics' },
     { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = '[F]iles' },
     -- { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = '[G]rep' },
