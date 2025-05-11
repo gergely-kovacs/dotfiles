@@ -98,8 +98,6 @@ return {
         map('gy', require('telescope.builtin').lsp_type_definitions, 'T[y]pe Definition')
         map('gd', vim.lsp.buf.definition, '[D]efinition')
         map('gD', vim.lsp.buf.declaration, 'Declaration')
-        map('<leader>ld', require('telescope.builtin').lsp_document_symbols, '[D]ocument Symbols')
-        map('<leader>lw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace Symbols')
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.

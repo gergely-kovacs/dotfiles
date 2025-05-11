@@ -5,7 +5,10 @@ return {
   config = function()
     require('cyberdream').setup {
       italic_comments = true,
-      borderless_telescope = false,
+      extensions = {
+        gitsigns = false,
+        indentblankline = false,
+      },
     }
     vim.cmd 'colorscheme cyberdream'
   end,

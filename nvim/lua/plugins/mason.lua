@@ -5,5 +5,9 @@ return {
     { '<leader>M', '<cmd>Mason<cr>', desc = '[M]ason' },
   },
   ---@class MasonSettings
-  opts = {},
+  opts = {
+    ui = {
+      border = 'rounded',
+    },
+  },
 }
