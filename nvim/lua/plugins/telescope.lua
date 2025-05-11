@@ -17,13 +17,18 @@ return {
         return vim.fn.executable 'make' == 1
       end,
     },
+    {
+      'nvim-telescope/telescope-live-grep-args.nvim',
+      version = '^1.0.0',
+    },
   },
   keys = {
     { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = '[B]uffers' },
     { '<leader>fc', '<cmd>Telescope git_bcommits<cr>', desc = '[C]ommits' },
     { '<leader>fd', '<cmd>Telescope diagnostics<cr>', desc = '[D]iagnostics' },
     { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = '[F]iles' },
-    { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = '[G]rep' },
+    -- { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = '[G]rep' },
+    { '<leader>fg', ':lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>', desc = '[G]rep' },
     { '<leader>fl', '<cmd>Telescope current_buffer_fuzzy_find<cr>', desc = '[L]ines' },
     { '<leader>fh', '<cmd>Telescope help_tags<cr>', desc = '[H]elp' },
     { '<leader>fk', '<cmd>Telescope keymaps<cr>', desc = '[K]eymaps' },
@@ -43,6 +48,14 @@ return {
     telescope.setup {
       extensions = {
         fzf = {},
+        live_grep_args = {
+          auto_quoting = false,
+          theme = 'ivy',
+          file_ignore_patterns = { 'package%-lock%.json' },
+          additional_args = function(_)
+            return { '--hidden' }
+          end,
+        },
       },
       pickers = {
         current_buffer_fuzzy_find = {
@@ -51,14 +64,6 @@ return {
         find_files = {
           theme = 'dropdown',
           hidden = true,
-        },
-        -- TODO: make a custom command that can pass arguments to rg
-        live_grep = {
-          theme = 'ivy',
-          file_ignore_patterns = { 'package%-lock%.json' },
-          additional_args = function(_)
-            return { '--hidden' }
-          end,
         },
       },
     }
