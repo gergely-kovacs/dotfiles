@@ -11,7 +11,6 @@ return {
           timeout_ms = 2500,
         }
       end,
-      mode = '',
       desc = 'Format buffer',
     },
   },

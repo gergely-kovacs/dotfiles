@@ -5,7 +5,13 @@ return {
     'nvim-treesitter/nvim-treesitter',
   },
   keys = {
-    { '<leader>lc', '<cmd>lua require("neogen").generate()<cr>', desc = 'Generate [C]omment string' },
+    {
+      '<leader>lc',
+      function()
+        require('neogen').generate()
+      end,
+      desc = 'Generate [C]omment string',
+    },
   },
   opts = {
     enabled = true,

@@ -1,6 +1,107 @@
 return {
   'lewis6991/gitsigns.nvim',
   event = 'BufReadPre',
+  keys = {
+    {
+      ']h',
+      function()
+        require('gitsigns').nav_hunk 'next'
+      end,
+      desc = 'Next Hunk',
+    },
+    {
+      '[h',
+      function()
+        require('gitsigns').nav_hunk 'prev'
+      end,
+      desc = 'Prev Hunk',
+    },
+    {
+      ']H',
+      function()
+        require('gitsigns').nav_hunk 'last'
+      end,
+      desc = 'Last Hunk',
+    },
+    {
+      '[H',
+      function()
+        require('gitsigns').nav_hunk 'first'
+      end,
+      desc = 'First Hunk',
+    },
+    {
+      '<leader>gs',
+      mode = { 'n', 'v' },
+      function()
+        require('gitsigns').stage_hunk()
+      end,
+      desc = '[S]tage Hunk',
+    },
+    {
+      '<leader>gr',
+      mode = { 'n', 'v' },
+      function()
+        require('gitisngs').reset_hunt()
+      end,
+      desc = '[R]eset Hunk',
+    },
+    {
+      '<leader>gS',
+      function()
+        require('gitsigns').stage_buffer()
+      end,
+      desc = 'Stage buffer',
+    },
+    {
+      '<leader>gR',
+      function()
+        require('gitsigns').reset_buffer()
+      end,
+      desc = 'Reset buffer',
+    },
+    {
+      '<leader>gp',
+      function()
+        require('gitsigns').preview_hunk()
+      end,
+      desc = '[P]review Hunk Inline',
+    },
+    {
+      '<leader>gb',
+      function()
+        require('gitsigns').blame_line { full = true }
+      end,
+      desc = '[B]lame Line',
+    },
+    {
+      '<leader>gB',
+      function()
+        require('gitsigns').toggle_current_line_blame()
+      end,
+      desc = 'Toggle Current Line Blame',
+    },
+    {
+      '<leader>gd',
+      function()
+        require('gitsigns').diffthis()
+      end,
+      desc = '[D]iff This',
+    },
+    {
+      '<leader>gD',
+      function()
+        require('gitsigns').diffthis '~'
+      end,
+      desc = 'Diff This ~',
+    },
+    {
+      'ih',
+      mode = { 'o', 'x' },
+      ':<C-U>Gitsigns select_hunk<CR>',
+      desc = 'Inside hunk',
+    },
+  },
   opts = {
     attach_to_untracked = true,
     preview_config = {
@@ -16,27 +117,4 @@ return {
       untracked = { text = '▎' },
     },
   },
-  init = function()
-    local gs = require 'gitsigns'
-
-    local function map(mode, l, r, desc)
-      vim.keymap.set(mode, l, r, { desc = desc })
-    end
-
-    -- stylua: ignore start
-    map("n", "]h", function() gs.nav_hunk("next") end, "Next Hunk")
-    map("n", "[h", function() gs.nav_hunk("prev") end, "Prev Hunk")
-    map("n", "]H", function() gs.nav_hunk("last") end, "Last Hunk")
-    map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
-    map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<CR>", "[S]tage Hunk")
-    map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>", "[R]eset Hunk")
-    map("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
-    map("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
-    map("n", "<leader>gp", gs.preview_hunk, "[P]review Hunk Inline")
-    map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "[B]lame Line")
-    map("n", "<leader>gB", gs.toggle_current_line_blame, "Toggle Current Line Blame")
-    map("n", "<leader>gd", gs.diffthis, "[D]iff This")
-    map("n", "<leader>gD", function() gs.diffthis("~") end, "Diff This ~")
-    map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
-  end,
 }
