@@ -42,7 +42,7 @@ return {
       '<leader>gr',
       mode = { 'n', 'v' },
       function()
-        require('gitisngs').reset_hunt()
+        require('gitsigns').reset_hunk()
       end,
       desc = '[R]eset Hunk',
     },
