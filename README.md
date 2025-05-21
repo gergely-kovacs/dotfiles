@@ -20,6 +20,10 @@ ln -s ~/projects/dotfiles/starship/starship.toml ~/.config/
 
 rm ~/.config/starship.toml
 
+configure your shell to use starship, here's the command for bash:
+
+eval "$(starship init bash)"
+
 ## Wezterm
 
 [Install wezterm](https://wezterm.org/install/linux.html#installing-on-fedora-and-rpm-based-systems-via-copr)
