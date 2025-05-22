@@ -31,15 +31,10 @@ config.keys = {
     action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
   },
   {
-    key = 'm',
-    mods = 'LEADER',
-    action = wezterm.action.TogglePaneZoomState,
-  },
-  {
     key = 's',
     mods = 'LEADER',
     action = wezterm.action_callback(function(win, pane)
-      resurrect.save_state(resurrect.workspace_state.get_workspace_state())
+      resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
       resurrect.window_state.save_window_action()
     end),
   },
@@ -47,27 +42,26 @@ config.keys = {
     key = 'l',
     mods = 'LEADER',
     action = wezterm.action_callback(function(win, pane)
-      resurrect.fuzzy_load(win, pane, function(id, label)
+      resurrect.fuzzy_loader.fuzzy_load(win, pane, function(id, label)
         local type = string.match(id, '^([^/]+)') -- match before '/'
         id = string.match(id, '([^/]+)$') -- match after '/'
         id = string.match(id, '(.+)%..+$') -- remove file extension
-        local state
+        local opts = {
+          close_open_tabs = true,
+          window = pane:window(),
+          relative = true,
+          restore_text = true,
+          on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+        }
         if type == 'workspace' then
-          state = resurrect.load_state(id, 'workspace')
-          resurrect.workspace_state.restore_workspace(state, {
-            relative = true,
-            restore_text = true,
-            on_pane_restore = resurrect.tab_state.default_on_pane_restore,
-          })
+          local state = resurrect.state_manager.load_state(id, 'workspace')
+          resurrect.workspace_state.restore_workspace(state, opts)
         elseif type == 'window' then
-          state = resurrect.load_state(id, 'window')
-          resurrect.window_state.restore_window(pane:window(), state, {
-            relative = true,
-            restore_text = true,
-            on_pane_restore = resurrect.tab_state.default_on_pane_restore,
-            -- uncomment this line to use active tab when restoring
-            -- tab = win:active_tab(),
-          })
+          local state = resurrect.state_manager.load_state(id, 'window')
+          resurrect.window_state.restore_window(pane:window(), state, opts)
+        elseif type == 'tab' then
+          local state = resurrect.state_manager.load_state(id, 'tab')
+          resurrect.tab_state.restore_tab(pane:tab(), state, opts)
         end
       end)
     end),
@@ -84,6 +78,9 @@ smart_splits.apply_to_config(config)
 wezterm.on('gui-startup', function(cmd)
   local _, _, window = mux.spawn_window(cmd or {})
   window:gui_window():maximize()
+
+  wezterm.plugin.update_all()
+  wezterm.reload_configuration()
 end)
 
 return config
