@@ -22,7 +22,6 @@ return {
       enabled = true,
     },
     servers = {
-      gopls = {},
       rust_analyzer = {
         settings = {
           ['rust-analyzer'] = {
