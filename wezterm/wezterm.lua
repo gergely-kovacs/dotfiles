@@ -48,9 +48,11 @@ config.keys = {
         id = string.match(id, '(.+)%..+$') -- remove file extension
         local opts = {
           close_open_tabs = true,
+          close_open_panes = true,
           window = pane:window(),
           relative = true,
           restore_text = true,
+          resize_window = false,
           on_pane_restore = resurrect.tab_state.default_on_pane_restore,
         }
         if type == 'workspace' then
