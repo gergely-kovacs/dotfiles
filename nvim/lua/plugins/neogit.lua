@@ -8,10 +8,7 @@ return {
   },
   opts = {},
   keys = {
-    { '<leader>gg', '<cmd>Neogit<cr>', { desc = 'Neo[G]it Tab' } },
-    { '<leader>gk', '<cmd>Neogit kind=split_above<cr>', { desc = 'Neogit Split Above' } },
-    { '<leader>gj', '<cmd>Neogit kind=split<cr>', { desc = 'Neogit Split Below' } },
-    { '<leader>gl', '<cmd>Neogit kind=vsplit<cr>', { desc = 'Neogit Split Right' } },
-    { '<leader>gc', '<cmd>Neogit commit<cr>', { desc = 'Neogit [C]ommit' } },
+    { '<leader>gg', '<cmd>Neogit<cr>', desc = 'Neo[G]it' },
+    { '<leader>gc', '<cmd>Neogit commit<cr>', desc = '[C]ommit' },
   },
 }
