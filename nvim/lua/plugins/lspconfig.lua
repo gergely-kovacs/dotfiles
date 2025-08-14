@@ -39,7 +39,17 @@ return {
           },
         },
       },
-      tailwindcss = {},
+      tailwindcss = {
+        root_dir = function(bufnr, on_dir)
+          local result = vim.fn.systemlist "rg --fixed-strings 'tailwindcss'"
+
+          if #result > 0 then
+            return vim.fn.getcwd()
+          else
+            return nil
+          end
+        end,
+      },
       ruff = {},
       pyright = {
         settings = {
