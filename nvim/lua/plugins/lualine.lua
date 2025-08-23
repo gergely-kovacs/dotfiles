@@ -46,7 +46,7 @@ return {
       },
       normal = {
         a = { fg = colors.bg, bg = colors.blue },
-        b = { fg = colors.bg, bg = colors.grey },
+        b = { fg = colors.fg, bg = colors.bg_highlight },
         c = { fg = colors.fg, bg = colors.bg },
       },
       visual = { a = { fg = colors.bg, bg = colors.magenta } },
