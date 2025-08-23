@@ -6,5 +6,9 @@ return {
     'nvim-tree/nvim-web-devicons',
   },
   ---@class mkv.config
-  opts = {},
+  opts = {
+    preview = {
+      hybrid_modes = { 'n' },
+    },
+  },
 }
