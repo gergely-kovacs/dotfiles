@@ -44,9 +44,9 @@ return {
           local result = vim.fn.systemlist "rg --fixed-strings 'tailwindcss'"
 
           if #result > 0 then
-            return vim.fn.getcwd()
+            on_dir(vim.fn.getcwd())
           else
-            return nil
+            on_dir(nil)
           end
         end,
       },
