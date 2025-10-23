@@ -80,19 +80,17 @@ return {
       ensure_installed = vim.tbl_keys(opts.servers),
     }
 
-    local lspconfig = require 'lspconfig'
-
     for server, config in pairs(opts.servers) do
       config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
-      lspconfig[server].setup(config)
+      vim.lsp.config(server, config)
+      vim.lsp.enable(server)
     end
 
-    lspconfig.gleam.setup {}
-
-    lspconfig.gdscript.setup {
+    vim.lsp.config('gdscript', {
       name = 'godot',
       cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
-    }
+    })
+    vim.lsp.enable 'gdscript'
 
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(event)
