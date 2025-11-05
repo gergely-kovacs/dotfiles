@@ -27,7 +27,7 @@ vim.opt.sessionoptions = 'buffers,curdir,folds,localoptions,globals,tabpages'
 
 -- Sync clipboard between OS and Neovim.
 -- See `:help 'clipboard'`
-vim.opt.clipboard = 'unnamed,unnamedplus'
+vim.opt.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.opt.breakindent = true
