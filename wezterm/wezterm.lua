@@ -9,7 +9,7 @@ config.colors = require 'cyberdream'
 config.use_fancy_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = true
 config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
-config.font_size = 11
+config.font_size = 10
 config.font = wezterm.font 'FiraMono Nerd Font'
 config.window_padding = {
   left = 0,
