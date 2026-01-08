@@ -16,6 +16,11 @@ return {
         )
         vim.keymap.set('n', '<leader>lR', '<cmd>TSToolsRenameFile<cr>', { buffer = bufnr, desc = 'Rename file' })
       end,
+      settings = {
+        tsserver_file_preferences = {
+          importModuleSpecifierPreference = 'non-relative',
+        }
+      }
     }
   end,
 }
