@@ -2,7 +2,7 @@ return {
   'rcarriga/nvim-notify',
   event = 'VeryLazy',
   dependencies = {
-    'nvim-telescope/telescope.nvim',
+    'ibhagwan/fzf-lua',
   },
   ---@type notify.Config
   ---@diagnostic disable-next-line: missing-fields
@@ -11,7 +11,13 @@ return {
     timeout = 3000,
   },
   keys = {
-    { '<leader>fm', '<cmd>Telescope notify<cr>', desc = '[M]essages' },
+    {
+      '<leader>fm',
+      function()
+        require('notify.integrations.fzf').open()
+      end,
+      desc = '[M]essages',
+    },
     {
       '<leader>qm',
       function()

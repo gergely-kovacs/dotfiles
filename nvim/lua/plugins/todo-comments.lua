@@ -1,10 +1,10 @@
 return {
   'folke/todo-comments.nvim',
   event = 'VimEnter',
-  cmd = { 'TodoTelescope' },
+  cmd = { 'TodoFzfLua' },
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope.nvim',
+    'ibhagwan/fzf-lua',
   },
   opts = {
     signs = false,
@@ -29,7 +29,13 @@ return {
       end,
       desc = 'Previous Todo Comment',
     },
-    { '<leader>fn', '<cmd>TodoTelescope<cr>', desc = '[N]otes' },
-    { '<leader>fN', '<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>', desc = 'Todo / Fix / Fixme' },
+    { '<leader>fn', '<cmd>TodoFzfLua<cr>', desc = '[N]otes' },
+    {
+      '<leader>fN',
+      function()
+        require('todo-comments.fzf').todo { keywords = { 'TODO', 'FIX', 'FIXME' } }
+      end,
+      desc = 'Todo / Fix / Fixme',
+    },
   },
 }

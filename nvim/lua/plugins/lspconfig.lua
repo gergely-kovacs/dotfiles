@@ -2,7 +2,7 @@ return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
-    'nvim-telescope/telescope.nvim',
+    'ibhagwan/fzf-lua',
     'saghen/blink.cmp',
     {
       'mason-org/mason-lspconfig.nvim',
@@ -102,7 +102,7 @@ return {
           })
         end
 
-        map('gy', require('telescope.builtin').lsp_type_definitions, 'T[y]pe Definition')
+        map('gy', require('fzf-lua').lsp_typedefs, 'T[y]pe Definition')
         map('gd', vim.lsp.buf.definition, '[D]efinition')
         map('gD', vim.lsp.buf.declaration, 'Declaration')
 
