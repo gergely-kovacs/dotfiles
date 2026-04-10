@@ -2,24 +2,71 @@ return {
   'nvim-treesitter/nvim-treesitter',
   lazy = false,
   build = ':TSUpdate',
-  opts = {
-    -- Autoinstall languages that are not installed
-    auto_install = true,
-    highlight = {
-      enable = true,
-      -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-      --  If you are experiencing weird indenting issues, add the language to
-      --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-      additional_vim_regex_highlighting = { 'ruby' },
-    },
-    indent = {
-      enable = true,
-      disable = { 'ruby' },
-    },
-  },
-  config = function(_, opts)
-    ---@diagnostic disable-next-line: missing-fields
-    require('nvim-treesitter').setup(opts)
+  config = function()
+    local ts = require('nvim-treesitter')
+
+    local available = {}
+    for _, lang in ipairs(ts.get_available()) do
+      available[lang] = true
+    end
+
+    local installed = {}
+    for _, lang in ipairs(ts.get_installed()) do
+      installed[lang] = true
+    end
+
+    local installing = {}
+
+    local function enable_treesitter(bufnr, lang)
+      vim.treesitter.start(bufnr, lang)
+      vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+
+    vim.api.nvim_create_autocmd('FileType', {
+      group = vim.api.nvim_create_augroup('dotfiles_treesitter_auto_install', { clear = true }),
+      callback = function(ev)
+        local ft = vim.bo[ev.buf].filetype
+        local lang = vim.treesitter.language.get_lang(ft)
+        if not lang or not available[lang] then
+          return
+        end
+
+        if installed[lang] then
+          pcall(enable_treesitter, ev.buf, lang)
+          return
+        end
+
+        if installing[lang] then
+          return
+        end
+
+        installing[lang] = true
+
+        ts.install(lang):await(function(err, ok)
+          installing[lang] = nil
+
+          if err or not ok then
+            vim.schedule(function()
+              vim.notify(
+                string.format('Failed to install treesitter parser for %s', lang),
+                vim.log.levels.WARN
+              )
+            end)
+            return
+          end
+
+          installed[lang] = true
+
+          vim.schedule(function()
+            for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+              if vim.api.nvim_buf_is_loaded(bufnr) and vim.bo[bufnr].filetype == ft then
+                pcall(enable_treesitter, bufnr, lang)
+              end
+            end
+          end)
+        end)
+      end,
+    })
 
     vim.treesitter.language.register('html', 'mjml')
 
