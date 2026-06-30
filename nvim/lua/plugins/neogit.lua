@@ -3,7 +3,7 @@ return {
   event = 'VeryLazy',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'sindrets/diffview.nvim',
+    'esmuellert/codediff.nvim',
     'ibhagwan/fzf-lua',
   },
   opts = {},
